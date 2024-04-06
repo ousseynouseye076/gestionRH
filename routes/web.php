@@ -31,5 +31,7 @@ Route::prefix('admin')
             ->names('roles');
         Route::resource('permissions', App\Http\Controllers\PermissionController::class)
             ->names('permissions');
+        Route::resource('users', App\Http\Controllers\UserController::class)
+            ->names('users');
 
     });

@@ -24,90 +24,60 @@
                 </a>
             </li><!-- Fin Catégories Nav -->
 
-        <li class="nav-heading">{{ __('GESTION') }}</li>
+        <li class="nav-heading">{{ __('GESTION PERSONNEL') }}</li>
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-journal-bookmark"></i>
-                <span>{{ __('Véhicules') }}</span>
+                <span>{{ __('Employées') }}</span>
                 <i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="#">
-                        <i class="bi bi-car-front"></i><span>{{ __('Liste des véhicules') }}</span>
+                        <i class="bi bi-car-front"></i><span>{{ __('Liste des employées') }}</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="#">
-                        <i class="bi bi-plus-circle-dotted"></i><span>{{ __('Ajouter un véhicules') }}</span>
+                        <i class="bi bi-plus-circle-dotted"></i><span>{{ __('Ajouter un employé') }}</span>
                     </a>
                 </li>
             </ul>
-        </li><!-- End Vehicle Nav -->
+        </li><!-- End Employées Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-person-badge"></i>
-                <span>{{ __('Chauffeurs') }}</span>
+                <span>{{ __('Contrats') }}</span>
                 <i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                @if(Route::has('admin.chauffeurs.index'))
+                @if(Route::has('admin.contrats.index'))
                     <li>
                         <a href="#">
-                            <i class="bi bi-circle"></i><span>{{ __('Liste des Chauffeurs') }}</span>
+                            <i class="bi bi-circle"></i><span>{{ __('Liste des Contrats') }}</span>
                         </a>
                     </li>
                 @endif
 
-                @if(Route::has('admin.chauffeurs.create'))
+                @if(Route::has('admin.contrats.create'))
                     <li>
                         <a href="#">
-                            <i class="bi bi-circle"></i><span>{{ __('Ajouter un Chauffeur') }}</span>
+                            <i class="bi bi-circle"></i><span>{{ __('Ajouter un Contrat') }}</span>
                         </a>
                     </li>
                 @endif
             </ul>
         </li><!-- End Chauffeurs Nav -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-person-rolodex"></i>
-                <span>{{ __('Clients') }}</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-
-                <li>
-                    <a href="">
-                        <i class="bi bi-circle"></i><span>{{ __('Liste des Clients') }}</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Clients Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#transactions-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-person-rolodex"></i>
-                <span>{{ __('Transactions') }}</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="transactions-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-
-                <li>
-                    <a href="">
-                        <i class="bi bi-circle"></i><span>{{ __('Liste des transactions') }}</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Transaction Nav -->
-
-        <li class="nav-heading">{{ __('Utilisateurs') }}</li>
+        <li class="nav-heading">{{ __('GESTION DES CONGéS') }}</li>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="#">
                 <i class="bi bi-people"></i>
-                <span>Tous les utilisateurs</span>
+                <span>{{ __('Congés') }}</span>
             </a>
         </li><!-- End Profile Page Nav -->
 
