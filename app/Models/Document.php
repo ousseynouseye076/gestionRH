@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Http\Requests\DocumentFormRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -29,6 +30,14 @@ class Document extends Model
             $data['path'] = $document->store('documents', 'public');
         }
         return $data;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
 }
