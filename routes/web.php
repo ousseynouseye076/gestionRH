@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('admin')
+    ->middleware(['auth:sanctum', 'verified'])
+    ->name('admin.')
+    ->group(function () {
+
+        Route::resource('roles', App\Http\Controllers\RoleController::class)
+            ->names('roles');
+        Route::resource('permissions', App\Http\Controllers\PermissionController::class)
+            ->names('permissions');
+
+    });
