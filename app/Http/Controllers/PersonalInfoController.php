@@ -5,27 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PersonalInfoFormRequest;
 use App\Models\PersonalInfo;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use PharIo\Version\Exception;
 
 class PersonalInfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -45,34 +30,44 @@ class PersonalInfoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(PersonalInfo $personalInfo)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PersonalInfo $personalInfo)
+    public function edit(PersonalInfo $personalInfo): View
     {
-        //
+        $info = PersonalInfo::findOrFail($personalInfo->id);
+        $user = User::where('personal_info_id', $info->id)->first();
+        return view('admin.users.personal-infos.edit', compact('info', 'user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PersonalInfo $personalInfo)
+    public function update(PersonalInfoFormRequest $request, PersonalInfo $personalInfo): RedirectResponse
     {
-        //
+        try {
+            $info = PersonalInfo::findOrFail($personalInfo->id);
+            $info->update($request->validated());
+            return redirect()->route('admin.users.index')
+                ->with('success', 'Personal info updated successfully');
+        } catch (Exception $ex){
+            return redirect()->back()
+                ->with('error', $ex->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PersonalInfo $personalInfo)
+    public function destroy(PersonalInfo $personalInfo): RedirectResponse
     {
-        //
+        try {
+            $info = PersonalInfo::findOrFail($personalInfo->id);
+            $info->delete();
+            return redirect()->route('admin.users.index')
+                ->with('success', 'Personal info deleted successfully');
+        } catch (Exception $ex){
+            return redirect()->back()
+                ->with('error', $ex->getMessage());
+        }
     }
 }

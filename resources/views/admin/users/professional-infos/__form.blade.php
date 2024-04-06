@@ -1,7 +1,16 @@
-@php /* @var App\Models\ProfessionalInfo $professionalInfo */ @endphp
+@php
+    $professionalInfo ??= new \App\Models\ProfessionalInfo();
+@endphp
 <form method="POST" action="{{ $action }}" class="needs-validation" novalidate enctype="multipart/form-data">
     @csrf
     @method($method)
+
+    @include('components.input', [
+        'name' => 'user',
+        'type' => 'hidden',
+        'value' => $user->id,
+        'class' => 'd-none',
+    ])
 
     @include('components.input', [
         'name' => 'job_title',

@@ -34,6 +34,8 @@ Route::prefix('admin')
         Route::resource('users', App\Http\Controllers\UserController::class)
             ->names('users');
         Route::resource('personal-infos', App\Http\Controllers\PersonalInfoController::class)
-            ->names('personal-infos');
+            ->names('personal-infos')->except(['show', 'index', 'create']);
+        Route::resource('professional-infos', App\Http\Controllers\PersonalInfoController::class)
+            ->names('professional-infos')->except(['show', 'index', 'create']);
 
     });

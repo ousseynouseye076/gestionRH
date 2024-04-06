@@ -1,14 +1,14 @@
 @php
-    /* @var App\Models\PersonalInfo $info */
+    /* @var App\Models\ProfessionalInfo $info */
     $disabled ??= false;
 @endphp
 
     <!-- Vertically centered Modal -->
 <button type="button" class="btn btn-sm btn-outline-primary @disabled($disabled)"
-        data-bs-toggle="modal" data-bs-target="#modal-contrat-{{ $id }}">
+        data-bs-toggle="modal" data-bs-target="#modal-professional-{{ $id }}">
     {{ $title }} <i class="bi bi-file-earmark-text"></i>
 </button>
-<div class="modal fade" id="modal-contrat-{{ $id }}" tabindex="-1">
+<div class="modal fade" id="modal-professional-{{ $id }}" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -21,28 +21,28 @@
                     <div class="row">
                         <div class="col-12">
                             <p class="card-text">
-                                <span class="fw-bold">Numéro du NCI: </span>{{ $info->nci }}
+                                <span class="fw-bold">Fonction: </span>{{ $info->job_title }}
                             </p>
 
                             <p class="card-text">
-                                <span class="fw-bold">Nom: </span>{{ $info->last_name }} {{ $info->first_name }}
+                                <span class="fw-bold">Entreprise: </span>{{ $info->company }}
                             </p>
                             <p class="card-text">
-                                <span class="fw-bold">Date de naissance: </span>
-                                {{ $info->date_of_birth }}
+                                <span class="fw-bold">Compétences: </span>
+                                {{ $info->competence }}
                             </p>
                             <p class="card-text">
-                                <span class="fw-bold">Téléphone: </span>{{ $info->phone }}
+                                <span class="fw-bold">Expérience: </span>{{ $info->experience }}
                             </p>
                             <p class="card-text">
-                                <span class="fw-bold">Adresse: </span>{{ $info->address }}
+                                <span class="fw-bold">Langues: </span>{{ $info->languages }}
                             </p>
                         </div>
                     </div>
                 @else
                     <!-- If contrat don't exist -->
-                    @include('admin.users.partials._form-perso-info', [
-                        'action' => route('admin.personal-infos.store'),
+                    @include('admin.users.professional-infos.__form', [
+                        'action' => route('admin.professional-infos.store'),
                         'method' => 'POST',
                         'info' => $info,
                         'user' => $user,
@@ -53,14 +53,14 @@
                 {{-- Supprimer les informations personnelles --}}
                 @if($info)
                     <form class="d-inline delete-form"
-                          action="{{ route('admin.personal-infos.destroy', $info) }}" method="POST">
+                          action="{{ route('admin.professional-infos.destroy', $info) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger">
                             Supprimer <i class="bi bi-trash"></i>
                         </button>
                     </form>
-                    <a href="{{ route('admin.personal-infos.edit', $info) }}"
+                    <a href="{{ route('admin.professional-infos.edit', $info) }}"
                        type="button" class="btn btn-sm btn-primary">
                         Modifier <i class="bi bi-pencil-square"></i>
                     </a>

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('company')->nullable();
             $table->string('competence')->nullable();
             $table->string('experience')->nullable();
-            $table->string('other')->nullable();
             $table->string('languages')->nullable();
             $table->timestamps();
         });

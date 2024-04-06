@@ -44,6 +44,7 @@
                                     <th scope="col">{{ __("Email") }}</th>
                                     <th scope="col">{{ __("Role") }}</th>
                                     <th scope="col">{{ __("Info Personnel") }}</th>
+                                    <th scope="col">{{ __("Info Professionnelle") }}</th>
                                     <th scope="col">{{ __("Actions") }}</th>
                                 </tr>
                                 </thead><!-- End Thead -->
@@ -55,13 +56,21 @@
                                         <td>{{ $user->email }}</td><!-- Email -->
                                         <td>{{ $user?->roles->first()?->name }}</td><!-- Role -->
                                         <td>
-                                            @include('admin.users.partials.__personal-info-modal', [
+                                            @include('admin.users.personal-infos.__modal', [
                                                 'info' => $user->personalInfo ?? null,
                                                 'id' => $user->id,
                                                 'title' => 'Informations personnelles',
                                                 'user' => $user
                                             ])
                                         </td><!-- Personal Info -->
+                                        <td>
+                                            @include('admin.users.professional-infos.__modal', [
+                                                'info' => $user->professionalInfo ?? null,
+                                                'id' => $user->id,
+                                                'title' => 'Informations professionnelles',
+                                                'user' => $user
+                                            ])
+                                        </td><!-- Professional Info -->
                                         <td class="text-center">
                                             <div class="text-center actions d-flex gap-3">
                                                 <a href="{{ route('admin.users.edit', $user) }}"
@@ -70,7 +79,7 @@
                                                 </a><!-- Edit button -->
                                                 <form class="delete-form"
                                                       action="{{ route('admin.users.destroy', $user) }}"
-                                                      method="POST" >
+                                                      method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" title="Supprimer l'utilisateur"
