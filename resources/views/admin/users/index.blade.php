@@ -1,4 +1,4 @@
-@extends('layouts.admin.base')
+@extends('layouts.base')
 @section('title', 'Employées')
 @section('content')
 
@@ -43,8 +43,7 @@
                                     <th scope="col">{{ __("Nom") }}</th>
                                     <th scope="col">{{ __("Email") }}</th>
                                     <th scope="col">{{ __("Role") }}</th>
-                                    <th scope="col">{{ __("Téléphone") }}</th>
-                                    <th scope="col">{{ __("Adresse") }}</th>
+                                    <th scope="col">{{ __("Info Personnel") }}</th>
                                     <th scope="col">{{ __("Actions") }}</th>
                                 </tr>
                                 </thead><!-- End Thead -->
@@ -54,9 +53,15 @@
 
                                         <td>{{ $user->name }}</td><!-- Name -->
                                         <td>{{ $user->email }}</td><!-- Email -->
-                                        <td>{{ $user?->role?->name }}</td><!-- Role -->
-                                        <td>{{ $user->telephone }}</td><!-- Telephone -->
-                                        <td>{{ $user->address }}</td><!-- Address -->
+                                        <td>{{ $user?->roles->first()?->name }}</td><!-- Role -->
+                                        <td>
+                                            @include('admin.users.partials.__personal-info-modal', [
+                                                'info' => $user->personalInfo ?? null,
+                                                'id' => $user->id,
+                                                'title' => 'Informations personnelles',
+                                                'user' => $user
+                                            ])
+                                        </td><!-- Personal Info -->
                                         <td class="text-center">
                                             <div class="text-center actions d-flex gap-3">
                                                 <a href="{{ route('admin.users.edit', $user) }}"

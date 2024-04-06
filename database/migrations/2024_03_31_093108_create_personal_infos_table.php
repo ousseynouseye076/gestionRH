@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nci')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->dateTime('date_of_birth')->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->timestamps();
         });
     }

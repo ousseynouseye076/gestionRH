@@ -41,8 +41,6 @@ class RoleController extends Controller
 
             Role::create(['name' => $request->input('name')]);
 
-            dd($request);
-
             foreach ($request->input('permissions') as $permission) {
                 $role = Role::findByName($request->input('name'));
                 $role->givePermissionTo($permission);

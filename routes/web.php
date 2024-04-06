@@ -33,5 +33,7 @@ Route::prefix('admin')
             ->names('permissions');
         Route::resource('users', App\Http\Controllers\UserController::class)
             ->names('users');
+        Route::resource('personal-infos', App\Http\Controllers\PersonalInfoController::class)
+            ->names('personal-infos');
 
     });

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PersonalInfoFormRequest;
 use App\Models\PersonalInfo;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use PharIo\Version\Exception;
 
 class PersonalInfoController extends Controller
 {
@@ -26,9 +30,18 @@ class PersonalInfoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PersonalInfoFormRequest $request): RedirectResponse
     {
-        //
+        try {
+            $info = PersonalInfo::create($request->validated());
+            $user = User::findOrFail($request->get('user'));
+            $user->update(['personal_info_id' => $info->id]);
+            return redirect()->route('admin.users.index')
+                ->with('success', 'Personal info added successfully');
+        } catch (Exception $ex){
+            return redirect()->back()
+                ->with('error', $ex->getMessage());
+        }
     }
 
     /**
